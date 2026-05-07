@@ -110,6 +110,7 @@ public class MyDodo extends Dodo
 	{ // check if more steps must be taken
 	    move(); // take a step
 	    nrStepsTaken++; // increment the counter
+	    System.out.println("moved: " + nrStepsTaken);
 	}
     }
 
