@@ -156,4 +156,9 @@ public class MyDodo extends Dodo
 	    return true;
 	}
     }
+    
+    public void turn180() {
+	turnRight();
+	turnRight();
+    }
 }
