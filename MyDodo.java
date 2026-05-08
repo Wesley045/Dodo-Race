@@ -11,8 +11,8 @@ public class MyDodo extends Dodo
 
     public MyDodo()
     {
-	super(EAST);
-	myNrOfEggsHatched = 0;
+    super(EAST);
+    myNrOfEggsHatched = 0;
     }
 
     public void act()
@@ -30,13 +30,13 @@ public class MyDodo extends Dodo
      */
     public void move()
     {
-	if (canMove())
-	{
-	    step();
-	} else
-	{
-	    showError("I'm stuck!");
-	}
+    if (canMove())
+    {
+        step();
+    } else
+    {
+        showError("I'm stuck!");
+    }
     }
 
     /**
@@ -53,13 +53,13 @@ public class MyDodo extends Dodo
      */
     public boolean canMove()
     {
-	if (borderAhead())
-	{
-	    return false;
-	} else
-	{
-	    return true;
-	}
+    if (borderAhead())
+    {
+        return false;
+    } else
+    {
+        return true;
+    }
     }
 
     /**
@@ -73,14 +73,14 @@ public class MyDodo extends Dodo
      */
     public void hatchEgg()
     {
-	if (onEgg())
-	{
-	    pickUpEgg();
-	    myNrOfEggsHatched++;
-	} else
-	{
-	    showError("There was no egg in this cell");
-	}
+    if (onEgg())
+    {
+        pickUpEgg();
+        myNrOfEggsHatched++;
+    } else
+    {
+        showError("There was no egg in this cell");
+    }
     }
 
     /**
@@ -90,7 +90,7 @@ public class MyDodo extends Dodo
      */
     public int getNrOfEggsHatched()
     {
-	return myNrOfEggsHatched;
+    return myNrOfEggsHatched;
     }
 
     /**
@@ -105,13 +105,13 @@ public class MyDodo extends Dodo
      */
     public void jump(int distance)
     {
-	int nrStepsTaken = 0; // set counter to 0
-	while (nrStepsTaken < distance)
-	{ // check if more steps must be taken
-	    move(); // take a step
-	    nrStepsTaken++; // increment the counter
-	    System.out.println("moved: " + nrStepsTaken);
-	}
+    int nrStepsTaken = 0; // set counter to 0
+    while (nrStepsTaken < distance)
+    { // check if more steps must be taken
+        move(); // take a step
+        nrStepsTaken++; // increment the counter
+        System.out.println("moved: " + nrStepsTaken);
+    }
     }
 
     /**
@@ -126,11 +126,12 @@ public class MyDodo extends Dodo
 
     public void walkToWorldEdgePrintingCoordinates()
     {
-	while (!borderAhead())
-	{
-	    // print coordinates
-	    move();
-	}
+    while (!borderAhead())
+    {
+        // print coordinates
+        System.out.println(getX() + ", " + getY());
+        move();
+    }
     }
 
     /**
@@ -147,19 +148,19 @@ public class MyDodo extends Dodo
 
     public boolean canLayEgg()
     {
-	if (onEgg())
-	{
-	    // E
-	    return false;
+    if (onEgg())
+    {
+        // E
+        return false;
 
-	} else
-	{
-	    return true;
-	}
+    } else
+    {
+        return true;
+    }
     }
     
     public void turn180() {
-	turnRight();
-	turnRight();
+    turnRight();
+    turnRight();
     }
 }
