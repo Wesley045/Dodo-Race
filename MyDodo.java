@@ -53,7 +53,7 @@ public class MyDodo extends Dodo
      */
     public boolean canMove()
     {
-    if (borderAhead())
+    if (borderAhead() || fenceAhead())
     {
         return false;
     } else
