@@ -200,4 +200,10 @@ public class MyDodo extends Dodo
         move();
     }
     }
+        
+    public void goBackToStartOfRowAndFaceBack(){
+        turn180();
+        walkToWorldEdge();
+        turn180();
+    }
 }
