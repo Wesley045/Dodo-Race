@@ -129,7 +129,7 @@ public class MyDodo extends Dodo
     while (!borderAhead())
     {
         // print coordinates
-        System.out.println(getX() + ", " + getY());
+        System.out.println("X = " + getX() + ", " + "Y = " + getY());
         move();
     }
     }
@@ -158,26 +158,48 @@ public class MyDodo extends Dodo
         return true;
     }
     }
-    
-    public void turn180() {
+
+    public void turn180()
+    {
     turnRight();
     turnRight();
     }
-    
-    public boolean grainAhead(){
+
+    public void climbOverFence()
+    {
+    turnLeft();
     move();
-    if (onGrain()){
-    turn180();
+    turnRight();
     move();
-    turn180();
-    return true;
+    move();
+    turnRight();
+    move();
+    turnLeft();
     }
-    else{
-    turn180();
+
+    public boolean grainAhead()
+    {
     move();
-    turn180();
-    return false;
+    if (onGrain())
+    {
+        turn180();
+        move();
+        turn180();
+        return true;
+    } else
+    {
+        turn180();
+        move();
+        turn180();
+        return false;
     }
-    
+    }
+
+    public void goToEgg()
+    {
+    while (!onEgg())
+    {
+        move();
+    }
     }
 }
