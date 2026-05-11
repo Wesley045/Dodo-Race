@@ -206,4 +206,20 @@ public class MyDodo extends Dodo
         walkToWorldEdge();
         turn180();
     }
+    
+    public void walkToWorldEdgeClimbingOverFences(){
+    while(!borderAhead()){
+        if (!fenceAhead()){
+            move();
+        }
+        else{
+            climbOverFence();
+        }
+    }
+    
+    
+    
+    
+    
+    }
 }
