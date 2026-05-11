@@ -124,12 +124,10 @@ public class MyDodo extends Dodo
      * printed in the console.
      */
 
-    public void walkToWorldEdgePrintingCoordinates()
+    public void walkToWorldEdge()
     {
     while (!borderAhead())
     {
-        // print coordinates
-        System.out.println("X = " + getX() + ", " + "Y = " + getY());
         move();
     }
     }
