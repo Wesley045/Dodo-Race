@@ -126,7 +126,7 @@ public class MyDodo extends Dodo
 
     public void walkToWorldEdge()
     {
-    while (!borderAhead())
+    while (!borderAhead() && !fenceAhead())
     {
         move();
     }
@@ -157,11 +157,30 @@ public class MyDodo extends Dodo
     }
     }
 
+    /**
+     * Dodo draait 180 graden.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo draait 180 graden om en kijkt naar de andere kant.
+     */
+
     public void turn180()
     {
     turnRight();
     turnRight();
     }
+
+    /**
+     * Dodo klimt over het hekje heen
+     * 
+     * <p>
+     * Initial: Dodo staat voor een hekje.
+     * <p>
+     * Final: Dodo staat voor een hekje en klimt er over heen en staat dan aan de
+     * andere kant van het hek.
+     */
 
     public void climbOverFence()
     {
@@ -174,6 +193,15 @@ public class MyDodo extends Dodo
     move();
     turnLeft();
     }
+
+    /**
+     * Dodo kijkt of er een graan voor hem is.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo returnt een true or false boolean.
+     */
 
     public boolean grainAhead()
     {
@@ -193,6 +221,15 @@ public class MyDodo extends Dodo
     }
     }
 
+    /**
+     * De dodo stopt op het ei als hij die tegen komt.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo returnt een true or false boolean.
+     */
+
     public void goToEgg()
     {
     while (!onEgg())
@@ -200,26 +237,42 @@ public class MyDodo extends Dodo
         move();
     }
     }
-        
-    public void goBackToStartOfRowAndFaceBack(){
-        turn180();
-        walkToWorldEdge();
-        turn180();
+
+    public void goBackToStartOfRowAndFaceBack()
+    {
+    turn180();
+    walkToWorldEdge();
+    turn180();
     }
-    
-    public void walkToWorldEdgeClimbingOverFences(){
-    while(!borderAhead()){
-        if (!fenceAhead()){
+
+    public void walkToWorldEdgeClimbingOverFences()
+    {
+    while (!borderAhead())
+    {
+        if (!fenceAhead())
+        {
+        move();
+        } else
+        {
+        climbOverFence();
+        }
+    }
+
+    }
+
+    public void pickUpGrainsAndPrintCoordinates()
+    {
+    while (!borderAhead())
+    {
+        if (!onGrain())
+        {     
             move();
         }
-        else{
-            climbOverFence();
+        if(onGrain()){
+            pickUpGrain();
+            System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());   
         }
     }
-    
-    
-    
-    
-    
+
     }
 }
