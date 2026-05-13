@@ -208,15 +208,11 @@ public class MyDodo extends Dodo
     move();
     if (onGrain())
     {
-        turn180();
-        move();
-        turn180();
+        stepOneCellBackwards();
         return true;
     } else
     {
-        turn180();
-        move();
-        turn180();
+        stepOneCellBackwards();
         return false;
     }
     }
@@ -273,6 +269,12 @@ public class MyDodo extends Dodo
             System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());   
         }
     }
-
+    }
+    
+    public void stepOneCellBackwards(){
+        turn180();
+        move();
+        turn180();
+    
     }
 }
