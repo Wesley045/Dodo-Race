@@ -129,8 +129,9 @@ public class MyDodo extends Dodo
     while (!borderAhead() && !fenceAhead())
     {
         move();
-        if (onNest() && !onEgg()){
-            layEgg();
+        if (onNest() && !onEgg())
+        {
+        layEgg();
         }
     }
     }
@@ -255,6 +256,10 @@ public class MyDodo extends Dodo
         {
         climbOverFence();
         }
+        if(onNest()){
+            layEgg();
+            break;
+        }
     }
 
     }
@@ -264,22 +269,23 @@ public class MyDodo extends Dodo
     while (!borderAhead())
     {
         if (!onGrain())
-        {     
-            move();
-        }
-        if(onGrain()){
-            pickUpGrain();
-            System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());   
-        }
-    }
-    }
-    
-    public void stepOneCellBackwards(){
-        turn180();
+        {
         move();
-        turn180();
-    
+        }
+        if (onGrain())
+        {
+        pickUpGrain();
+        System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());
+        }
     }
-    
-    
+    }
+
+    public void stepOneCellBackwards()
+    {
+    turn180();
+    move();
+    turn180();
+
+    }
+
 }
