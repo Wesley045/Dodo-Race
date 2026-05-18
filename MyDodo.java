@@ -129,6 +129,9 @@ public class MyDodo extends Dodo
     while (!borderAhead() && !fenceAhead())
     {
         move();
+        if (onNest() && !onEgg()){
+            layEgg();
+        }
     }
     }
 
@@ -277,4 +280,6 @@ public class MyDodo extends Dodo
         turn180();
     
     }
+    
+    
 }
