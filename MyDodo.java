@@ -238,12 +238,37 @@ public class MyDodo extends Dodo
 	}
     }
 
+    /**
+     * Dodo draait 180 graden om en loopt naar de worldborder en draait vervolgens
+     * weer 180 graden om.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo staat tegen de rand van de worldborder en kijkt de andere kant
+     * op.
+     * 
+     * @return
+     */
+
     public void goBackToStartOfRowAndFaceBack()
     {
 	turn180();
 	walkToWorldEdge();
 	turn180();
     }
+
+    /**
+     * Dodo blijft lopen totdat hij bij de worldborder is als hij onderweg een hekje
+     * tegen komt klimt hij erover heen en vervolgd zijn pad.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo loopt naar de worldborder.
+     * 
+     * @return
+     */
 
     public void walkToWorldEdgeClimbingOverFences()
     {
@@ -265,6 +290,18 @@ public class MyDodo extends Dodo
 
     }
 
+    /**
+     * Als dodo graan tegen komt tijdens het lopen dan pakt hij hem op en geeft de
+     * exacte coordinates waar hij het graantje heeft gepakt.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Alle graan pakt hij op onderweg.
+     * 
+     * @return
+     */
+
     public void pickUpGrainsAndPrintCoordinates()
     {
 	while (!borderAhead())
@@ -281,6 +318,17 @@ public class MyDodo extends Dodo
 	}
     }
 
+    /**
+     * Dodo die gaat een stapje naar achtere toe.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo staat een vakje terug.
+     * 
+     * @return
+     */
+
     public void stepOneCellBackwards()
     {
 	turn180();
@@ -288,6 +336,16 @@ public class MyDodo extends Dodo
 	turn180();
     }
 
+    /**
+     * Dodo loopt om de hekjes heen tot hij een eitje tegen komt.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo staat stil op het eitje.
+     * 
+     * @return
+     */
     public void walkAroundFencedArea()
     {
 	while (!onEgg())
@@ -317,13 +375,4 @@ public class MyDodo extends Dodo
 	}
     }
 
-    public void draaiRechts()
-    {
-	turnRight();
-    }
-
-    public void draaiLinks()
-    {
-	turnLeft();
-    }
 }
