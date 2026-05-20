@@ -11,8 +11,8 @@ public class MyDodo extends Dodo
 
     public MyDodo()
     {
-    super(EAST);
-    myNrOfEggsHatched = 0;
+	super(EAST);
+	myNrOfEggsHatched = 0;
     }
 
     public void act()
@@ -30,13 +30,13 @@ public class MyDodo extends Dodo
      */
     public void move()
     {
-    if (canMove())
-    {
-        step();
-    } else
-    {
-        showError("I'm stuck!");
-    }
+	if (canMove())
+	{
+	    step();
+	} else
+	{
+	    showError("I'm stuck!");
+	}
     }
 
     /**
@@ -53,13 +53,13 @@ public class MyDodo extends Dodo
      */
     public boolean canMove()
     {
-    if (borderAhead() || fenceAhead())
-    {
-        return false;
-    } else
-    {
-        return true;
-    }
+	if (borderAhead() || fenceAhead())
+	{
+	    return false;
+	} else
+	{
+	    return true;
+	}
     }
 
     /**
@@ -73,14 +73,14 @@ public class MyDodo extends Dodo
      */
     public void hatchEgg()
     {
-    if (onEgg())
-    {
-        pickUpEgg();
-        myNrOfEggsHatched++;
-    } else
-    {
-        showError("There was no egg in this cell");
-    }
+	if (onEgg())
+	{
+	    pickUpEgg();
+	    myNrOfEggsHatched++;
+	} else
+	{
+	    showError("There was no egg in this cell");
+	}
     }
 
     /**
@@ -90,7 +90,7 @@ public class MyDodo extends Dodo
      */
     public int getNrOfEggsHatched()
     {
-    return myNrOfEggsHatched;
+	return myNrOfEggsHatched;
     }
 
     /**
@@ -105,13 +105,13 @@ public class MyDodo extends Dodo
      */
     public void jump(int distance)
     {
-    int nrStepsTaken = 0; // set counter to 0
-    while (nrStepsTaken < distance)
-    { // check if more steps must be taken
-        move(); // take a step
-        nrStepsTaken++; // increment the counter
-        System.out.println("moved: " + nrStepsTaken);
-    }
+	int nrStepsTaken = 0; // set counter to 0
+	while (nrStepsTaken < distance)
+	{ // check if more steps must be taken
+	    move(); // take a step
+	    nrStepsTaken++; // increment the counter
+	    System.out.println("moved: " + nrStepsTaken);
+	}
     }
 
     /**
@@ -126,14 +126,14 @@ public class MyDodo extends Dodo
 
     public void walkToWorldEdge()
     {
-    while (!borderAhead() && !fenceAhead())
-    {
-        move();
-        if (onNest() && !onEgg())
-        {
-        layEgg();
-        }
-    }
+	while (!borderAhead() && !fenceAhead())
+	{
+	    move();
+	    if (onNest() && !onEgg())
+	    {
+		layEgg();
+	    }
+	}
     }
 
     /**
@@ -150,15 +150,15 @@ public class MyDodo extends Dodo
 
     public boolean canLayEgg()
     {
-    if (onEgg())
-    {
-        // E
-        return false;
+	if (onEgg())
+	{
+	    // E
+	    return false;
 
-    } else
-    {
-        return true;
-    }
+	} else
+	{
+	    return true;
+	}
     }
 
     /**
@@ -172,8 +172,8 @@ public class MyDodo extends Dodo
 
     public void turn180()
     {
-    turnRight();
-    turnRight();
+	turnRight();
+	turnRight();
     }
 
     /**
@@ -188,14 +188,14 @@ public class MyDodo extends Dodo
 
     public void climbOverFence()
     {
-    turnLeft();
-    move();
-    turnRight();
-    move();
-    move();
-    turnRight();
-    move();
-    turnLeft();
+	turnLeft();
+	move();
+	turnRight();
+	move();
+	move();
+	turnRight();
+	move();
+	turnLeft();
     }
 
     /**
@@ -209,16 +209,16 @@ public class MyDodo extends Dodo
 
     public boolean grainAhead()
     {
-    move();
-    if (onGrain())
-    {
-        stepOneCellBackwards();
-        return true;
-    } else
-    {
-        stepOneCellBackwards();
-        return false;
-    }
+	move();
+	if (onGrain())
+	{
+	    stepOneCellBackwards();
+	    return true;
+	} else
+	{
+	    stepOneCellBackwards();
+	    return false;
+	}
     }
 
     /**
@@ -232,60 +232,98 @@ public class MyDodo extends Dodo
 
     public void goToEgg()
     {
-    while (!onEgg())
-    {
-        move();
-    }
+	while (!onEgg())
+	{
+	    move();
+	}
     }
 
     public void goBackToStartOfRowAndFaceBack()
     {
-    turn180();
-    walkToWorldEdge();
-    turn180();
+	turn180();
+	walkToWorldEdge();
+	turn180();
     }
 
     public void walkToWorldEdgeClimbingOverFences()
     {
-    while (!borderAhead())
-    {
-        if (!fenceAhead())
-        {
-        move();
-        } else
-        {
-        climbOverFence();
-        }
-        if(onNest()){
-            layEgg();
-            break;
-        }
-    }
+	while (!borderAhead())
+	{
+	    if (!fenceAhead())
+	    {
+		move();
+	    } else
+	    {
+		climbOverFence();
+	    }
+	    if (onNest())
+	    {
+		layEgg();
+		break;
+	    }
+	}
 
     }
 
     public void pickUpGrainsAndPrintCoordinates()
     {
-    while (!borderAhead())
-    {
-        if (!onGrain())
-        {
-        move();
-        }
-        if (onGrain())
-        {
-        pickUpGrain();
-        System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());
-        }
-    }
+	while (!borderAhead())
+	{
+	    if (!onGrain())
+	    {
+		move();
+	    }
+	    if (onGrain())
+	    {
+		pickUpGrain();
+		System.out.println("Er ligt een graan op: " + "x = " + getX() + ", y = " + getY());
+	    }
+	}
     }
 
     public void stepOneCellBackwards()
     {
-    turn180();
-    move();
-    turn180();
-
+	turn180();
+	move();
+	turn180();
     }
 
+    public void walkAroundFencedArea()
+    {
+	while (!onEgg())
+	{
+	    turnRight();
+	    if (fenceAhead())
+	    {
+		turnLeft();
+		if (!fenceAhead())
+		{
+		    move();
+		} else
+		{
+		    turnLeft();
+		}
+	    } else
+	    {
+		if (!fenceAhead())
+		{
+		    move();
+		} else
+		{
+		    turnLeft();
+		    move();
+		}
+	    }
+	}
+    }
+
+    public void draaiRechts()
+    {
+	turnRight();
+    }
+
+    public void draaiLinks()
+    {
+	turnLeft();
+    }
 }
