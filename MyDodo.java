@@ -383,12 +383,42 @@ public class MyDodo extends Dodo
                     pickUpEgg();
                 } 
                 if (onNest()){
-                    return;
+                    break;
                 }
         }
         if (!eggAhead() && !nestAhead()){
             turnRight();
         }
+    }
+}
+
+public void searchNestInMaze(){
+    while (!onNest()){
+        turnRight();
+        if (fenceAhead())
+        {
+        turnLeft();
+        if (!fenceAhead())
+        {
+            move();
+        } else
+        {
+            turnLeft();
+        }
+        } else
+        {
+        if (!fenceAhead())
+        {
+            move();
+        } else
+        {
+            turnLeft();
+            move();
+        }
+        }
+    }
+    if (onNest()){
+        System.out.println("Dodo heeft het nest gevonden");
     }
 }
 
