@@ -422,4 +422,15 @@ public void searchNestInMaze(){
     }
 }
 
+public void eggWissel(){
+    BlueEgg blueEgg = new BlueEgg();
+    GoldenEgg goldenEgg = new GoldenEgg();
+    
+    int tijdelijkeWaardeEi = blueEgg.getValue();
+    blueEgg.setValue(goldenEgg.getValue());
+    goldenEgg.setValue(tijdelijkeWaardeEi);
+    
+    System.out.println("BlueEgg Waarde: " + blueEgg.getValue() +" \nGoldenEgg Waarde: "+ goldenEgg.getValue());
+}
+
 }
