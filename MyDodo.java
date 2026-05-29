@@ -433,4 +433,26 @@ public void eggWissel(){
     System.out.println("BlueEgg Waarde: " + blueEgg.getValue() +" \nGoldenEgg Waarde: "+ goldenEgg.getValue());
 }
 
+
+public void faceEast(){
+    int direction = getDirection();
+        while (direction != 1){
+            turnRight();
+            direction = getDirection();
+        }
+}
+
+public void faceRichting(int locatie){
+    if (locatie <= 3 && locatie >= 0){
+        int direction = getDirection();
+        while (direction != locatie){
+            turnRight();
+            direction = getDirection();
+        }
+    }else{
+        showError("Ongeldige Richting");
+    }
+
+}
+
 }
