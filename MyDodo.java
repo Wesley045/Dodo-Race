@@ -375,25 +375,55 @@ public class MyDodo extends Dodo
     }
     }
     
-    public void eggTrailToNest(){
-    while (!onNest()){
-        if (eggAhead() || nestAhead()){
-            move();
-                if (onEgg()){
-                    pickUpEgg();
-                } 
-                if (onNest()){
-                    break;
-                }
+    /**
+     * Dodo volgt het eieren spoor naar het nest.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo staat aan het einde van het spoor stil op het nest.
+     * 
+     * @return
+     */
+
+    public void eggTrailToNest()
+    {
+    while (!onNest())
+    {
+        if (eggAhead() || nestAhead())
+        {
+        move();
+        if (onEgg())
+        {
+            pickUpEgg();
         }
-        if (!eggAhead() && !nestAhead()){
-            turnRight();
+        if (onNest())
+        {
+            break;
+        }
+        }
+        if (!eggAhead() && !nestAhead())
+        {
+        turnRight();
         }
     }
-}
+    }
+    
+    /**
+     * Dodo zoekt naar de nest in de doolhof.
+     * 
+     * <p>
+     * Initial: Het nest moet langs een henkje staan.
+     * <p>
+     * Final: Doormiddel van de hekjes vind de dodo het nest.
+     * 
+     * @return
+     */
 
-public void searchNestInMaze(){
-    while (!onNest()){
+    public void searchNestInMaze()
+    {
+    while (!onNest())
+    {
         turnRight();
         if (fenceAhead())
         {
@@ -417,42 +447,188 @@ public void searchNestInMaze(){
         }
         }
     }
-    if (onNest()){
+    if (onNest())
+    {
         System.out.println("Dodo heeft het nest gevonden");
     }
-}
+    }
+    
+    /**
+     * Alle eiren wisselen van waarde met elkaar.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: het blauwe is is het gouden ei, en het gouden ei is het blauwe ei.
+     * 
+     * @return
+     */
 
-public void eggWissel(){
+    public void eggWissel()
+    {
     BlueEgg blueEgg = new BlueEgg();
     GoldenEgg goldenEgg = new GoldenEgg();
-    
+
     int tijdelijkeWaardeEi = blueEgg.getValue();
     blueEgg.setValue(goldenEgg.getValue());
     goldenEgg.setValue(tijdelijkeWaardeEi);
+
+    System.out.println("BlueEgg Waarde: " + blueEgg.getValue() + " \nGoldenEgg Waarde: " + goldenEgg.getValue());
+    }
     
-    System.out.println("BlueEgg Waarde: " + blueEgg.getValue() +" \nGoldenEgg Waarde: "+ goldenEgg.getValue());
-}
+    /**
+     * Dodo kijkt naar het westen.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo draait naar het westen toe.
+     * 
+     * @return
+     */
 
-
-public void faceEast(){
+    public void faceEast()
+    {
     int direction = getDirection();
-        while (direction != 1){
-            turnRight();
-            direction = getDirection();
-        }
-}
+    while (direction != 1)
+    {
+        turnRight();
+        direction = getDirection();
+    }
+    }
+    
+    /**
+     * Dodo daait naar richting.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo draait naar de ingevoerde richting toe.
+     * 
+     * @return
+     */
 
-public void faceRichting(int locatie){
-    if (locatie <= 3 && locatie >= 0){
-        int direction = getDirection();
-        while (direction != locatie){
-            turnRight();
-            direction = getDirection();
+    public void faceRichting(int locatie)
+    {
+    if (locatie <= 3 && locatie >= 0)
+    {
+        while (getDirection() != locatie)
+        {
+        turnRight();
         }
-    }else{
+    } else
+    {
         showError("Ongeldige Richting");
     }
 
-}
+    }
+    
+    /**
+     * Dodo gaat naar de coordinaten toe.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo gaat naar de ingevoerde coordinaten toe als ze geldig zijn.
+     * 
+     * @return
+     */
 
+    public void goToLocation(int coordX, int coordY)
+    {
+    if (validCoordinates(coordX, coordY) == true)
+    {
+        if (coordX > getX())
+        {
+        setDirection(EAST);
+        while (coordX > getX() && !fenceAhead())
+        {
+            move();
+        }
+
+        }
+        if (coordX < getX())
+        {
+        setDirection(WEST);
+        while (coordX < getX() && !fenceAhead())
+        {
+            move();
+        }
+        }
+        if (coordY > getY())
+        {
+        setDirection(SOUTH);
+        while (coordY > getY() && !fenceAhead())
+        {
+            move();
+        }
+        }
+        if (coordY < getY())
+        {
+        setDirection(NORTH);
+        while (coordY < getY() && !fenceAhead())
+        {
+            move();
+        }
+        }
+    }
+    }
+    
+    /**
+     * Controlleerd of de coordinaten overeen komen met het bord.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Geeft een true of false terug.
+     * 
+     * @return: true of false.
+     */
+
+    public boolean validCoordinates(int x, int y)
+    {
+    if (x <= 11 && x >= 0)
+    {
+        return true;
+    }
+
+    if (y <= 11 && y >= 0)
+    {
+        return true;
+    }
+    showError("Invalid coordinates");
+    return false;
+    }
+    
+    /**
+     * Dodo telt de eieren die hij in de rij tegen komt.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo telt de eieren in de rij en gaat vervolgens terug naar het begin.
+     * 
+     * @return
+     */
+    
+    public int countEggsInRow(){
+        int eggsInRow = 0;
+        
+        while(!borderAhead()){
+            if(!onEgg()){
+                move();
+            }else if(onEgg()) {
+                eggsInRow++;
+                move();
+            }
+          }
+          
+        if (onEgg()){
+            eggsInRow++;
+        }
+          
+        goBackToStartOfRowAndFaceBack();
+          
+        return eggsInRow;
+    }
 }
