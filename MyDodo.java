@@ -706,4 +706,28 @@ public class MyDodo extends Dodo
     
         return rowNumber;
     }
+    
+    public void layEggPatron(){
+        int locationX = getX();
+        int locationY = getY();
+        int coordX = locationX;
+        int coordY = locationY;
+        int height = getWorld().getHeight();
+        int n = 0;
+        
+        while(coordY <= height){
+            
+            layTrailOfEggs(n);
+            setLocation(coordX, coordY);
+            n++;
+            coordY++;
+        }
+    
+    
+    
+    
+    
+    
+    
+    }
 }
