@@ -661,7 +661,6 @@ public class MyDodo extends Dodo
         int coordY = 1;
         boolean endCount = false;
         
-        
         goToLocation(0, 0);
         setDirection(EAST);
         
@@ -674,13 +673,37 @@ public class MyDodo extends Dodo
         }else{
             endCount = true;
         }
-        
-        
-        
-        
-    }
-        
+    }  
     return howManyEggs;
+    }
     
+    public int selectRowWithMostEggs(){
+        int howManyEggs = 0;
+        int coordY = 1;
+        int mostEggs = 0;
+        int rowNumber = 0;
+        
+        boolean endCount = false;
+        
+        goToLocation(0, 0);
+        setDirection(EAST);
+        
+        while(!endCount){
+            howManyEggs = countEggsInRow();
+            
+            if(howManyEggs >= mostEggs){
+                mostEggs = howManyEggs;
+                rowNumber = getY();
+            }
+            
+            if(getY() != 9){
+                goToLocation(0,coordY++);
+                setDirection(EAST);
+            }else{
+                endCount = true;
+            }
+        }
+    
+        return rowNumber;
     }
 }
