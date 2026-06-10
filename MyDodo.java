@@ -748,5 +748,34 @@ public class MyDodo extends Dodo
         }
         layTrailOfEggs(eggToLay);
     }
+    
+    public void layEggPatronPiramide(){
+        int startX = getX();
+        int heightRoom = getWorld().getHeight() - 1;
+        int n = 0;
+        int face = 0;
+        
+        layTrailOfEggs(n += 1);
+        if (!borderAhead()){
+                    setLocation(startX, getY() + 1);
+                    
+                }
+
+        while(getY()< heightRoom){
+            layTrailOfEggs(n += 1);
+            face = n - 1; 
+            setDirection(WEST);
+            layTrailOfEggs(face);
+            setDirection(EAST);
+                
+            if (!borderAhead()){
+                setLocation(startX, getY() + 1); 
+            } 
+        }
+        layTrailOfEggs(n += 1);
+        face = n - 1; 
+        setDirection(WEST);
+        layTrailOfEggs(face);
+    }
 }
 
