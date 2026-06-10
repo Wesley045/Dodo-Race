@@ -660,55 +660,44 @@ public class MyDodo extends Dodo
     }
     
     public int countEggsInWorld(){
-        int howManyEggs = 0;
-        int coordY = 1;
-        boolean endCount = false;
-        
-        goToLocation(0, 0);
+    int howManyEggs = 0;
+    int heightRoom = getWorld().getHeight() - 1;
+    
+    goToLocation(0, 0);
+    setDirection(EAST);
+    
+    while(getY() < heightRoom){
+        howManyEggs += countEggsInRow();
+        goToLocation(0, getY() + 1);
         setDirection(EAST);
-        
-        while(!endCount){
-        int eggsInWorld = countEggsInRow();
-        howManyEggs += eggsInWorld;
-        if(getY() != 9){
-            goToLocation(0,coordY++);
-            setDirection(EAST);
-        }else{
-            endCount = true;
-        }
-    }  
-    return howManyEggs;
     }
+    howManyEggs += countEggsInRow();
+    return howManyEggs;
+}
     
     public int selectRowWithMostEggs(){
-        int howManyEggs = 0;
-        int coordY = 1;
+        int heightRoom = getWorld().getHeight();
         int mostEggs = 0;
         int rowNumber = 0;
         
-        boolean endCount = false;
-        
         goToLocation(0, 0);
         setDirection(EAST);
         
-        while(!endCount){
-            howManyEggs = countEggsInRow();
+        for(int row = 0; row < heightRoom; row++){
+            int howManyEggs = countEggsInRow();
+            
+            goToLocation(0, row);
+            
+            setDirection(EAST);
+            
             
             if(howManyEggs >= mostEggs){
                 mostEggs = howManyEggs;
-                rowNumber = getY();
+                rowNumber = row;
             }
-            
-            if(getY() != 9){
-                goToLocation(0,coordY++);
-                setDirection(EAST);
-            }else{
-                endCount = true;
-            }
-        }
-    
-        return rowNumber;
     }
+    return rowNumber;
+}
     
     public void layEggPatron(){
         int startX = getX();
@@ -717,7 +706,7 @@ public class MyDodo extends Dodo
         
         while(getY()< heightRoom){
             layTrailOfEggs(n += 1);
-            if (!borderAhead()){
+            if (getY() + 1 < heightRoom){
                 setLocation(startX, getY() + 1);
             }else{
                 break;
@@ -750,32 +739,40 @@ public class MyDodo extends Dodo
     }
     
     public void layEggPatronPiramide(){
-        int startX = getX();
-        int heightRoom = getWorld().getHeight() - 1;
-        int n = 0;
-        int face = 0;
+    int startX = getX();
+    int heightRoom = getWorld().getHeight();
+    int n = 0;
+    int face = 0;
+    
+    while(getY() < heightRoom){
+        n++;
         
-        layTrailOfEggs(n += 1);
-        if (!borderAhead()){
-                    setLocation(startX, getY() + 1);
-                    
-                }
-
-        while(getY()< heightRoom){
-            layTrailOfEggs(n += 1);
-            face = n - 1; 
-            setDirection(WEST);
-            layTrailOfEggs(face);
-            setDirection(EAST);
-                
-            if (!borderAhead()){
-                setLocation(startX, getY() + 1); 
-            } 
-        }
-        layTrailOfEggs(n += 1);
-        face = n - 1; 
+        layTrailOfEggs(n);
+        boolean rightHitBorder = borderAhead();
+        
+        setLocation(startX, getY());
         setDirection(WEST);
+        face = n - 1;
         layTrailOfEggs(face);
+        boolean leftHitBorder = borderAhead();
+        setDirection(EAST);
+        
+        if(rightHitBorder || leftHitBorder) break;
+        
+        if(getY() + 1 < heightRoom){
+            setLocation(startX, getY() + 1);
+        } else {
+            break;
+        }
+    }
+}
+    
+    public double gemiddeldEggsBerekenen(){
+        int heightRoom = getWorld().getHeight();
+        int eggs = countEggsInWorld();
+        double gemiddelde = (double) eggs / heightRoom;
+        
+        return gemiddelde;
     }
 }
 
