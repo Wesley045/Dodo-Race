@@ -649,11 +649,14 @@ public class MyDodo extends Dodo
         layEgg();
         n--;
         }
-        if (n != 0)
+        if (n != 0 && !borderAhead())
         {
-        move();
+            move();
+        }else{
+            break;
         }
-    }
+    
+        }
     }
     
     public int countEggsInWorld(){
@@ -708,26 +711,42 @@ public class MyDodo extends Dodo
     }
     
     public void layEggPatron(){
-        int locationX = getX();
-        int locationY = getY();
-        int coordX = locationX;
-        int coordY = locationY;
-        int height = getWorld().getHeight();
+        int startX = getX();
+        int heightRoom = getWorld().getHeight();
         int n = 0;
         
-        while(coordY <= height){
-            
-            layTrailOfEggs(n);
-            setLocation(coordX, coordY);
-            n++;
-            coordY++;
+        while(getY()< heightRoom){
+            layTrailOfEggs(n += 1);
+            if (!borderAhead()){
+                setLocation(startX, getY() + 1);
+            }else{
+                break;
+            }
         }
+        if (!borderAhead()){
+                setLocation(startX, getY() + 1);
+            }
+    }
     
-    
-    
-    
-    
-    
-    
+    public void layEggPatronDouble(){
+        int startX = getX();
+        int startY = getY();
+        int heightRoom = getWorld().getHeight() - 1;
+        int widthRoom = getWorld().getWidth();
+        int eggToLay = 1;
+
+        while(getY() < heightRoom) {
+            layTrailOfEggs(eggToLay);
+            if (!borderAhead()){
+                setLocation(startX, getY() + 1);
+                faceEast();
+                eggToLay *= 2;
+            }else{
+                break;
+            }
+            
+        }
+        layTrailOfEggs(eggToLay);
     }
 }
+
