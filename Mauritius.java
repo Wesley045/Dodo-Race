@@ -225,6 +225,6 @@ public class Mauritius extends World
      * That is: create the initial objects and add them to the world.
      */
     private void prepare()
-    {
+    { 
     }
 }
