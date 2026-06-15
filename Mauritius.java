@@ -226,5 +226,28 @@ public class Mauritius extends World
      */
     private void prepare()
     { 
+        BlueEgg blueEgg = new BlueEgg();
+        addObject(blueEgg,2,0);
+        BlueEgg blueEgg2 = new BlueEgg();
+        addObject(blueEgg2,4,0);
+        BlueEgg blueEgg3 = new BlueEgg();
+        addObject(blueEgg3,1,2);
+        BlueEgg blueEgg4 = new BlueEgg();
+        addObject(blueEgg4,2,2);
+        BlueEgg blueEgg5 = new BlueEgg();
+        addObject(blueEgg5,4,2);
+        GoldenEgg goldenEgg = new GoldenEgg();
+        addObject(goldenEgg,5,2);
+        BlueEgg blueEgg6 = new BlueEgg();
+        addObject(blueEgg6,0,4);
+        BlueEgg blueEgg7 = new BlueEgg();
+        addObject(blueEgg7,1,4);
+        blueEgg6.setLocation(0,3);
+        GoldenEgg goldenEgg2 = new GoldenEgg();
+        addObject(goldenEgg2,0,5);
+        GoldenEgg goldenEgg3 = new GoldenEgg();
+        addObject(goldenEgg3,4,5);
+        GoldenEgg goldenEgg4 = new GoldenEgg();
+        addObject(goldenEgg4,5,4);
     }
 }
