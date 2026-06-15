@@ -883,5 +883,56 @@ public class MyDodo extends Dodo
         
     }
     
+    public void foutHerstelllen(){
+        int heightRoom = getWorld().getHeight() -1;
+        int widthRoom = getWorld().getWidth() -1;
+        int foutOne = -1;
+        int foutTwo = -1;
+        
+        goToLocation(0, 0);
+        setDirection(EAST);
+
+        while(getY() < heightRoom){
+            double eggsH = countEggsInRow();
+
+            if(eggsH % 2 != 0){
+                foutOne = getY();
+            }
+            goToLocation(0, getY() + 1);
+            setDirection(EAST);
+        }
+        double eggsH = countEggsInRow();
+        if(eggsH % 2 != 0){
+            foutOne = getY();
+        }
+        goToLocation(0, 0);
+        setDirection(SOUTH);
+        while(getX() < widthRoom){
+            double eggsV = countEggsInRow();
+            if(eggsV % 2 != 0){
+                foutTwo = getX();
+            }
+            goToLocation(getX() + 1, 0);
+            setDirection(SOUTH);
+        }
+        double eggsV = countEggsInRow();
+        if(eggsV % 2 != 0){
+            foutTwo = getX();
+        }
+        
+        if(foutOne == -1 && foutTwo == -1){
+            System.out.println("Geen fouten gevonden.");
+        }else{
+            goToLocation(foutTwo, foutOne);
+            if(!onEgg()){
+                layEgg();
+            }
+            else{
+                pickUpEgg();
+            }
+        }
+    
+    }
+    
 
 }
