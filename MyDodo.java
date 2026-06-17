@@ -641,6 +641,17 @@ public class MyDodo extends Dodo
         return eggsInRow;
     }
 
+    /**
+     * Dodo legt de ingevoerde eieren in een rij.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo legt alle ingevoerde eieren in een rij achter elkaar.
+     * 
+     * @return
+     */
+
     public void layTrailOfEggs(int n)
     {
         while (n != 0)
@@ -661,6 +672,17 @@ public class MyDodo extends Dodo
         }
     }
 
+    /**
+     * Dodo telt de eieren in de wereld.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo telt alle eieren die hij tegenkomt in de hele wereld.
+     * 
+     * @return
+     */
+
     public int countEggsInWorld()
     {
         int howManyEggs = 0;
@@ -678,6 +700,17 @@ public class MyDodo extends Dodo
         howManyEggs += countEggsInRow();
         return howManyEggs;
     }
+
+    /**
+     * Dodo telt alle eieren per rij en kijkt waar de meeste liggen
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: dodo telt de eieren in de wereld per rij en geeft dan de rij nummer terug.
+     * 
+     * @return int en dan de nummer van de rij met de meeste eieren.
+     */ 
 
     public int selectRowWithMostEggs()
     {
@@ -705,6 +738,17 @@ public class MyDodo extends Dodo
         return rowNumber;
     }
 
+    /**
+     * Dodo legt eieren in een bepaald patroon.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Zij legt eieren in een patroon en dat is een soort trapje tot zij niet meer verder kan.
+     * 
+     * @return
+     */
+
     public void layEggPatron()
     {
         int startX = getX();
@@ -727,6 +771,17 @@ public class MyDodo extends Dodo
             setLocation(startX, getY() + 1);
         }
     }
+
+    /**
+     * Dodo legt weer een patroon met eieren maar deze keer een ander.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo legt weer een trapjes patroon maar zij verdubbeld steeds de laatste uitstekende eieren van de rij.
+     * 
+     * @return
+     */
 
     public void layEggPatronDouble()
     {
@@ -752,6 +807,17 @@ public class MyDodo extends Dodo
         }
         layTrailOfEggs(eggToLay);
     }
+
+    /**
+     * Nog een patroon die door dodo wordt gemaakt.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo maakt een piramide vorm van eieren tot zij niet meer verder kan.
+     * 
+     * @return
+     */
 
     public void layEggPatronPiramide()
     {
@@ -787,6 +853,17 @@ public class MyDodo extends Dodo
         }
     }
 
+    /**
+     * Dodo telt alle eieren en vervolgens berekent ze de gemiddelde eieren per rij.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo telt alle eieren en deelt dat door de room hoogte.
+     * 
+     * @return double met het gemiddelde
+     */
+
     public double gemiddeldEggsBerekenen()
     {
         int heightRoom = getWorld().getHeight();
@@ -795,11 +872,22 @@ public class MyDodo extends Dodo
 
         return gemiddelde;
     }
+    
+    /**
+     * Dodo controlleerd de rijen of fouten en legt eventueel een eitje .
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo controlleerd de rijen of fouten en repareerd het dan en legt een eitje aan de rand van de wereld erbij.
+     * 
+     * @return
+     */
 
     public void pariteitsBit(){
         int heightRoom = getWorld().getHeight() -1;
         int widthRoom = getWorld().getWidth() -1;
-        
+
         goToLocation(0, 0);
         setDirection(EAST);
 
@@ -836,12 +924,23 @@ public class MyDodo extends Dodo
         }
     }
     
+    /**
+     * Dodo zoekt naar fouten en geeft daarna de cordinaten terug.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo controlleerd alle rijen op fouten en als hij een fout heeft gevonden slaat hij dat op en geeft hij dat aan het einde terug.
+     * 
+     * @return
+     */
+
     public void foutOpsporen(){
         int heightRoom = getWorld().getHeight() -1;
         int widthRoom = getWorld().getWidth() -1;
         int foutOne = -1;
         int foutTwo = -1;
-        
+
         goToLocation(0, 0);
         setDirection(EAST);
 
@@ -872,23 +971,33 @@ public class MyDodo extends Dodo
         if(eggsV % 2 != 0){
             foutTwo = getX();
         }
-        
+
         if(foutOne == -1 && foutTwo == -1){
             System.out.println("Geen fouten gevonden.");
         }else{
             System.out.println("Fout gevonden op:");
             System.out.println("Y: " + foutOne + ", " + "X: " + foutTwo);
         }
-        
-        
+
     }
     
+    /**
+     * Dodo controlleerd de wereld op fouten en hersteld dan de fout.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo controlleerd de wereld op fouten en legt er een eitje.
+     * 
+     * @return
+     */
+
     public void foutHerstelllen(){
         int heightRoom = getWorld().getHeight() -1;
         int widthRoom = getWorld().getWidth() -1;
         int foutOne = -1;
         int foutTwo = -1;
-        
+
         goToLocation(0, 0);
         setDirection(EAST);
 
@@ -919,7 +1028,7 @@ public class MyDodo extends Dodo
         if(eggsV % 2 != 0){
             foutTwo = getX();
         }
-        
+
         if(foutOne == -1 && foutTwo == -1){
             System.out.println("Geen fouten gevonden.");
         }else{
@@ -931,8 +1040,107 @@ public class MyDodo extends Dodo
                 pickUpEgg();
             }
         }
-    
+
     }
     
+    /**
+     * Dodo heeft zijn hoofd gestoten maar toch controlleerd ze de wereld op fouten en hersteld dan de fout.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo controlleerd de wereld op fouten en legt er een eitje ondangs dat ze hoofdpijn heeft.
+     * 
+     * @return
+     */
+
+    public void foutHerstelllenMetHoofdGestoten(){
+        int foutOne = -1;
+        int foutTwo = -1;
+        int count = 0;
+        int countHeight = 0;
+        int countWidth = 0;
+        boolean startPoint = false;
+        boolean endOfWorld = false;
+
+        while(!startPoint){
+            goBackToStartOfRowAndFaceBack();
+            turnRight();
+            goBackToStartOfRowAndFaceBack();
+            while(!borderAhead()){
+                move();
+                countHeight++;
+            }
+            goBackToStartOfRowAndFaceBack();
+            turnLeft();
+            while(!borderAhead()){
+                move();
+                countWidth++;
+            }
+            goBackToStartOfRowAndFaceBack();
+            startPoint = true;
+        }
+        while(count != countHeight){
+
+            double eggsH = countEggsInRow();
+
+            if(eggsH % 2 != 0){
+                foutOne = count;
+            }
+
+            turnRight();
+            move();
+            count++;
+            turnLeft();
+        }
+        double eggsH = countEggsInRow();
+
+        if(eggsH % 2 != 0){
+            foutOne = count;
+        }
+        turnLeft();
+        count = 0;
+        while(count != countWidth){
+
+            double eggsW = countEggsInRow();
+
+            if(eggsW % 2 != 0){
+                foutTwo = count;
+            }
+
+            turnRight();
+            move();
+            count++;
+            turnLeft();
+        }
+        double eggsW = countEggsInRow();
+
+        if(eggsW % 2 != 0){
+            foutTwo = count;
+        }
+
+        
+        if(foutOne == -1 && foutTwo == -1){
+            System.out.println("Geen fouten gevonden.");
+        }else{
+            while(foutOne != countHeight){
+                countHeight--;
+                move();
+            }
+            turnLeft();
+            while(foutTwo!= countWidth){
+                countWidth--;
+                move();
+            }
+            if(!onEgg()){
+                layEgg();
+            }
+            else{
+                pickUpEgg();
+            }
+        }
+    }
+
 
 }
+
