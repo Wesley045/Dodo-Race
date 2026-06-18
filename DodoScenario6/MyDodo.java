@@ -100,18 +100,42 @@ public class MyDodo extends Dodo
     }
     
     public void printCoordinatesOfEgg(Egg egg){
-        System.out.println("X: " + egg.getX() + " Y: " + egg.getY());
+        System.out.println("X: " + egg.getX() + " Y: " + egg.getY() + " Waarde: " + egg.getValue());
     
     } 
     
     public void makeListOfSurpriseEggsAndPrintCoordinates(){
-        
-        
         for(SurpriseEgg egg : makeListOfSurpriseEggs()){
             printCoordinatesOfEgg(egg);
         
         }
+    } 
+    
+    public int meestWaardevolleEgg(){
+        int waardevolsteEgg = 0;
+        
+        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+            if(waardevolsteEgg <= egg.getValue()){
+                waardevolsteEgg = egg.getValue();
+            }
+            printCoordinatesOfEgg(egg);
+        }
+        
+        return waardevolsteEgg;
+    } 
+    
+    public int gemiddeldeWaardeEggs(){
+        int totaal = 0;
+        int gemiddeldeEggWaarde = 0;
+            
+        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+            totaal += egg.getValue();
+        }
+    
+        gemi
         
     
-    } 
+    
+        return
+    }
 }
