@@ -95,14 +95,28 @@ public class MyDodo extends Dodo
         List<SurpriseEgg>  listOfEgss = SurpriseEgg.generateListOfSurpriseEggs( 12, getWorld() );
     }
     
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld.
+     * 
+     * @return De volledige lijst
+     */
+    
     public List<SurpriseEgg> makeListOfSurpriseEggs(){
         return SurpriseEgg.generateListOfSurpriseEggs( 10, getWorld() );
     }
+    
+    /* Print de cordinaten en waarde van het ingevoerde ei.
+     * 
+     */
     
     public void printCoordinatesOfEgg(Egg egg){
         System.out.println("X: " + egg.getX() + " Y: " + egg.getY() + " Waarde: " + egg.getValue());
     
     } 
+    
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld en 
+     * print de cordinaten en waarde uit per ei.
+     * 
+     */
     
     public void makeListOfSurpriseEggsAndPrintCoordinates(){
         for(SurpriseEgg egg : makeListOfSurpriseEggs()){
@@ -110,6 +124,13 @@ public class MyDodo extends Dodo
         
         }
     } 
+    
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld 
+     * controlleerd vervolgens of de waarde van het vorige ei of die groter of kleiner 
+     * is en bewaard de hoogste waarde.
+     * 
+     * @return de waardevolste ei
+     */
     
     public int meestWaardevolleEgg(){
         int waardevolsteEgg = 0;
@@ -123,6 +144,12 @@ public class MyDodo extends Dodo
         
         return waardevolsteEgg;
     } 
+    
+    /* Maakt een random lijst van 10 eieren en slaat dat op in een List en verdeeld 
+     * het over de wereld en vervolgens berekent hij de gemiddelde waarde van de eieren.
+     * 
+     * @return De volledige lijst
+     */
     
     public double gemiddeldeWaardeEggs(){
         List<SurpriseEgg> lijst = makeListOfSurpriseEggs();
