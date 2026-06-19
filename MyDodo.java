@@ -872,7 +872,7 @@ public class MyDodo extends Dodo
 
         return gemiddelde;
     }
-    
+
     /**
      * Dodo controlleerd de rijen of fouten en legt eventueel een eitje .
      * 
@@ -923,7 +923,7 @@ public class MyDodo extends Dodo
             layEgg();
         }
     }
-    
+
     /**
      * Dodo zoekt naar fouten en geeft daarna de cordinaten terug.
      * 
@@ -980,7 +980,7 @@ public class MyDodo extends Dodo
         }
 
     }
-    
+
     /**
      * Dodo controlleerd de wereld op fouten en hersteld dan de fout.
      * 
@@ -1042,7 +1042,7 @@ public class MyDodo extends Dodo
         }
 
     }
-    
+
     /**
      * Dodo heeft zijn hoofd gestoten maar toch controlleerd ze de wereld op fouten en hersteld dan de fout.
      * 
@@ -1119,7 +1119,6 @@ public class MyDodo extends Dodo
             foutTwo = count;
         }
 
-        
         if(foutOne == -1 && foutTwo == -1){
             System.out.println("Geen fouten gevonden.");
         }else{
@@ -1141,6 +1140,30 @@ public class MyDodo extends Dodo
         }
     }
 
+        /**
+     * Dodo beweegt naar een random richting toe.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Dodo beweegt naar een random richting en blijft dat doen tot dat hij 40 stappen heeft gezet.
+     * 
+     * @return
+     */
+    
+    public void moveRandomly(){
+        int myNrOfStepsTaken = 0;
 
+        faceRichting(randomDirection());
+        while(myNrOfStepsTaken < Mauritius.MAXSTEPS){
+            if(borderAhead() || fenceAhead()){
+                faceRichting(randomDirection());
+            }else{
+                move();
+                faceRichting(randomDirection());
+                myNrOfStepsTaken++;
+            }
+        };
+
+    }
 }
-
