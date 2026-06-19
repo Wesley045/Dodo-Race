@@ -1153,6 +1153,8 @@ public class MyDodo extends Dodo
     
     public void moveRandomly(){
         int myNrOfStepsTaken = 0;
+        
+        System.out.print(getScore(1, 2));
 
         faceRichting(randomDirection());
         while(myNrOfStepsTaken < Mauritius.MAXSTEPS){
