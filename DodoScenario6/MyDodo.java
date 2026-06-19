@@ -124,18 +124,16 @@ public class MyDodo extends Dodo
         return waardevolsteEgg;
     } 
     
-    public int gemiddeldeWaardeEggs(){
+    public double gemiddeldeWaardeEggs(){
+        List<SurpriseEgg> lijst = makeListOfSurpriseEggs();
         int totaal = 0;
-        int gemiddeldeEggWaarde = 0;
             
-        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+        for(SurpriseEgg egg: lijst){
             totaal += egg.getValue();
         }
     
-        gemi
+        double gemiddeldeEggWaarde = (double) totaal / lijst.size();
         
-    
-    
-        return
+        return gemiddeldeEggWaarde;
     }
 }
