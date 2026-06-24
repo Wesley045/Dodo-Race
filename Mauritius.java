@@ -67,6 +67,7 @@ public class Mauritius extends World
             Nest.class, Egg.class, Fence.class);        
         populate();
         prepare();
+        addObject(theScoreboard, 2, getHeight() -1);
     }
 
     public static void traceOn() {
@@ -249,5 +250,16 @@ public class Mauritius extends World
         addObject(goldenEgg3,4,5);
         GoldenEgg goldenEgg4 = new GoldenEgg();
         addObject(goldenEgg4,5,4);
+        removeObject(blueEgg4);
+        removeObject(blueEgg3);
+        removeObject(blueEgg);
+        removeObject(blueEgg2);
+        removeObject(blueEgg5);
+        removeObject(goldenEgg);
+        removeObject(goldenEgg4);
+        removeObject(goldenEgg3);
+        removeObject(goldenEgg2);
+        removeObject(blueEgg7);
+        removeObject(blueEgg6);
     }
 }

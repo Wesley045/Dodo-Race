@@ -1,4 +1,7 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  *
@@ -1140,13 +1143,136 @@ public class MyDodo extends Dodo
         }
     }
 
-        /**
-     * Dodo beweegt naar een random richting toe.
+    /**
+     * 
+     * 
+     * 
+     * Senario 6
+     * 
+     * 
+     * 
+     * 
+     */
+    
+    /**
+     * Places all the Egg objects in the world in a list.
+     * 
+     * @return List of Egg objects in the world
+     */
+    public List<Egg> getListOfEggsInWorld() {
+        return getWorld().getObjects(Egg.class);
+    }
+
+    public List<Integer> createListOfNumbers() {
+        return new ArrayList<> (Arrays.asList( 2, 43, 7, -5, 12, 7 ));
+    }
+
+    /**
+     * Method for praciticing with lists.
+     */
+    public void practiceWithLists( ){
+        List<Integer> listOfNumbers = createListOfNumbers();
+        
+        //the following is incorrect and is to be fixed in challenge 6.1c
+        System.out.println("First element: " + listOfNumbers.get(1) ); 
+    }
+
+    public void practiceWithListsOfSurpriseEggs(){
+        List<SurpriseEgg>  listOfEgss = SurpriseEgg.generateListOfSurpriseEggs( 12, getWorld() );
+    }
+    
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld.
+     * 
+     * @return De volledige lijst
+     */
+    
+    public List<SurpriseEgg> makeListOfSurpriseEggs(){
+        return SurpriseEgg.generateListOfSurpriseEggs( 10, getWorld() );
+    }
+    
+    /* Print de cordinaten en waarde van het ingevoerde ei.
+     * 
+     */
+    
+    public void printCoordinatesOfEgg(Egg egg){
+        System.out.println("X: " + egg.getX() + " Y: " + egg.getY() + " Waarde: " + egg.getValue());
+    
+    } 
+    
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld en 
+     * print de cordinaten en waarde uit per ei.
+     * 
+     */
+    
+    public void makeListOfSurpriseEggsAndPrintCoordinates(){
+        for(SurpriseEgg egg : makeListOfSurpriseEggs()){
+            printCoordinatesOfEgg(egg);
+        
+        }
+    } 
+    
+    /* Maakt een random lijst van 10 eieren en verdeeld dat over de wereld 
+     * controlleerd vervolgens of de waarde van het vorige ei of die groter of kleiner 
+     * is en bewaard de hoogste waarde.
+     * 
+     * @return de waardevolste ei
+     */
+    
+    public int meestWaardevolleEgg(){
+        int waardevolsteEgg = 0;
+        
+        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+            if(waardevolsteEgg <= egg.getValue()){
+                waardevolsteEgg = egg.getValue();
+            }
+            printCoordinatesOfEgg(egg);
+        }
+        
+        return waardevolsteEgg;
+    } 
+    
+    /* Maakt een random lijst van 10 eieren en slaat dat op in een List en verdeeld 
+     * het over de wereld en vervolgens berekent hij de gemiddelde waarde van de eieren.
+     * 
+     * @return De volledige lijst
+     */
+    
+    public double gemiddeldeWaardeEggs(){
+        List<SurpriseEgg> lijst = makeListOfSurpriseEggs();
+        int totaal = 0;
+            
+        for(SurpriseEgg egg: lijst){
+            totaal += egg.getValue();
+        }
+    
+        double gemiddeldeEggWaarde = (double) totaal / lijst.size();
+        
+        return gemiddeldeEggWaarde;
+    }
+    
+    public void pickUpNearestEggInList(){
+        int coordX = 0;
+        int coordY = 0;
+        
+        
+        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+            if(egg.getX() <= getX() && egg.getY() <= getY()){
+                coordX = egg.getX();
+                coordY = egg.getY();
+            }
+            
+            System.out.println(coordX+ " " + coordY);
+        }
+    }
+    
+    /**
+     * Dodo beweegt naar een random richting toe en kan 40 stappen zetten.
      * 
      * <p>
      * Initial:
      * <p>
-     * Final: Dodo beweegt naar een random richting en blijft dat doen tot dat hij 40 stappen heeft gezet.
+     * Final: Dodo beweegt naar een random richting en blijft dat doen tot dat hij 40 stappen heeft gezet 
+     * ondertussen wordt het scoreboard bijgewerkt.
      * 
      * @return
      */
@@ -1154,18 +1280,33 @@ public class MyDodo extends Dodo
     public void moveRandomly(){
         int myNrOfStepsTaken = 0;
         
-        System.out.print(getScore(1, 2));
-
         faceRichting(randomDirection());
-        while(myNrOfStepsTaken < Mauritius.MAXSTEPS){
-            if(borderAhead() || fenceAhead()){
+        for(int i = Mauritius.MAXSTEPS; myNrOfStepsTaken < Mauritius.MAXSTEPS;){
+        if(borderAhead() || fenceAhead()){
                 faceRichting(randomDirection());
             }else{
                 move();
+                i--;
+                getScore(i,0);
                 faceRichting(randomDirection());
                 myNrOfStepsTaken++;
             }
-        };
-
+        }
     }
+    
+        /**
+     * Werkt het scoreboard bij.
+     * 
+     * <p>
+     * Initial:
+     * <p>
+     * Final: Deze methode werkt het scoreboard bij.
+     * 
+     * @return
+     */
+    
+    public void getScore(int score1, int score2){
+    ((Mauritius)getWorld()).updateScore(score1, score2);
+    }
+    
 }
