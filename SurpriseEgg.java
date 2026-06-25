@@ -32,7 +32,7 @@ public class SurpriseEgg extends Egg
             return new ArrayList<SurpriseEgg>();
         }
     }
-    
+
     private static void placeEgg( Egg egg, int pos, World world ) {
         for( int y = 0; y < world.getHeight(); y++){
             for (int x = 0; x < world.getWidth(); x++){
@@ -46,6 +46,7 @@ public class SurpriseEgg extends Egg
             }
         }
     }
+
     private static void showError ( String err_msg, World world ) {
         Message.showMessage(  new Alert( err_msg ), world );
     }
