@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class MyDodo extends Dodo
 {
     private int myNrOfEggsHatched;
+    private int steps = Mauritius.MAXSTEPS;
 
     public MyDodo()
     {
@@ -539,6 +540,8 @@ public class MyDodo extends Dodo
 
     public void goToLocation(int coordX, int coordY)
     {
+        
+        
         if (validCoordinates(coordX, coordY) == true)
         {
             if (coordX > getX())
@@ -547,6 +550,7 @@ public class MyDodo extends Dodo
                 while (coordX > getX() && !fenceAhead())
                 {
                     move();
+                    getScore(steps -=1,0);
                 }
 
             }
@@ -556,6 +560,7 @@ public class MyDodo extends Dodo
                 while (coordX < getX() && !fenceAhead())
                 {
                     move();
+                    getScore(steps -=1,0);
                 }
             }
             if (coordY > getY())
@@ -564,6 +569,7 @@ public class MyDodo extends Dodo
                 while (coordY > getY() && !fenceAhead())
                 {
                     move();
+                    getScore(steps -=1,0);
                 }
             }
             if (coordY < getY())
@@ -572,6 +578,7 @@ public class MyDodo extends Dodo
                 while (coordY < getY() && !fenceAhead())
                 {
                     move();
+                    getScore(steps -=1,0);
                 }
             }
         }
@@ -1232,20 +1239,6 @@ public class MyDodo extends Dodo
         return gemiddeldeEggWaarde;
     }
 
-    public void pickUpNearestEggInList(){
-        int coordX = 0;
-        int coordY = 0;
-
-        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
-            if(egg.getX() <= getX() && egg.getY() <= getY()){
-                coordX = egg.getX();
-                coordY = egg.getY();
-            }
-
-            System.out.println(coordX+ " " + coordY);
-        }
-    }
-
     /**
      * Dodo beweegt naar een random richting toe en kan 40 stappen zetten.
      * 
@@ -1262,12 +1255,12 @@ public class MyDodo extends Dodo
         int myNrOfStepsTaken = 0;
 
         faceRichting(randomDirection());
-        for(int i = Mauritius.MAXSTEPS; myNrOfStepsTaken < Mauritius.MAXSTEPS;){
+        for(int i = steps; myNrOfStepsTaken < Mauritius.MAXSTEPS;){
             if(borderAhead() || fenceAhead()){
                 faceRichting(randomDirection());
             }else{
                 move();
-                i--;
+                i -= 1;
                 getScore(i,0);
                 faceRichting(randomDirection());
                 myNrOfStepsTaken++;
@@ -1325,5 +1318,29 @@ public class MyDodo extends Dodo
         }
         goToLocation(dx, dy);
         pickUpEgg();
+    }
+    
+    
+    
+    public void hetAlgoritme(){
+        boolean end = false;
+        
+        while(!end){
+            dichtbijzijndeEgg();
+            
+            
+            
+        
+        
+        
+        }
+    
+    
+    
+    
+    
+    
+    
+    
     }
 }
