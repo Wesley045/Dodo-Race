@@ -1341,10 +1341,11 @@ public class MyDodo extends Dodo
         int value = 0;
         int waardevolsteEgg = 0;
         int stepsNeeded = 1000;
+        int eggsRemain = getListOfEggsInWorld().size();
 
         Egg eggWaardevol = null;
 
-        while(steps > 0){
+        while(steps > 0 && eggsRemain > 0){
             total = 1000;
             stepsNeeded = 1000;
             waardevolsteEgg = 0;
@@ -1373,8 +1374,6 @@ public class MyDodo extends Dodo
                 }
 
             }
-            
-            System.out.println(stepsNeeded);
 
             if(eggWaardevol.getValue() > stepsNeeded){
                 goToLocation(eggWaardevol.getX(), eggWaardevol.getY());
@@ -1386,6 +1385,7 @@ public class MyDodo extends Dodo
 
             if(onEgg()){
                 pickUpEgg();
+                eggsRemain -= 1;
             }
         }
     }
