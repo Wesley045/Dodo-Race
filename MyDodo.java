@@ -12,6 +12,7 @@ public class MyDodo extends Dodo
 {
     private int myNrOfEggsHatched;
     private int steps = Mauritius.MAXSTEPS;
+    private int score = 0;
 
     public MyDodo()
     {
@@ -540,8 +541,7 @@ public class MyDodo extends Dodo
 
     public void goToLocation(int coordX, int coordY)
     {
-        
-        
+
         if (validCoordinates(coordX, coordY) == true)
         {
             if (coordX > getX())
@@ -549,8 +549,12 @@ public class MyDodo extends Dodo
                 setDirection(EAST);
                 while (coordX > getX() && !fenceAhead())
                 {
-                    move();
-                    getScore(steps -=1,0);
+                    if(steps != 0){
+                        move();
+                        getScore(steps -=1, score);
+                    }else{
+                        break;
+                    }
                 }
 
             }
@@ -559,8 +563,12 @@ public class MyDodo extends Dodo
                 setDirection(WEST);
                 while (coordX < getX() && !fenceAhead())
                 {
-                    move();
-                    getScore(steps -=1,0);
+                    if(steps != 0){
+                        move();
+                        getScore(steps -=1, score);
+                    }else{
+                        break;
+                    }
                 }
             }
             if (coordY > getY())
@@ -568,8 +576,12 @@ public class MyDodo extends Dodo
                 setDirection(SOUTH);
                 while (coordY > getY() && !fenceAhead())
                 {
-                    move();
-                    getScore(steps -=1,0);
+                    if(steps != 0){
+                        move();
+                        getScore(steps -=1, score);
+                    }else{
+                        break;
+                    }
                 }
             }
             if (coordY < getY())
@@ -577,8 +589,12 @@ public class MyDodo extends Dodo
                 setDirection(NORTH);
                 while (coordY < getY() && !fenceAhead())
                 {
-                    move();
-                    getScore(steps -=1,0);
+                    if(steps != 0){
+                        move();
+                        getScore(steps -=1, score);
+                    }else{
+                        break;
+                    }
                 }
             }
         }
@@ -1210,13 +1226,13 @@ public class MyDodo extends Dodo
     public int meestWaardevolleEgg(){
         int waardevolsteEgg = 0;
 
-        for(SurpriseEgg egg: makeListOfSurpriseEggs()){
+        for(Egg egg: getListOfEggsInWorld()){
             if(waardevolsteEgg <= egg.getValue()){
                 waardevolsteEgg = egg.getValue();
             }
             printCoordinatesOfEgg(egg);
-        }
 
+        }
         return waardevolsteEgg;
     } 
 
@@ -1282,7 +1298,7 @@ public class MyDodo extends Dodo
     public void getScore(int score1, int score2){
         ((Mauritius)getWorld()).updateScore(score1, score2);
     }
-    
+
     /**
      * Dodo kijkt naar de eieren op de map en kiest de dichtbijzijnste ei.
      * 
@@ -1300,7 +1316,6 @@ public class MyDodo extends Dodo
         int dy = -1;
 
         for(Egg egg : getListOfEggsInWorld()){
-            System.out.println(egg);
 
             int positionX = egg.getX() - getX();
             int positionY = egg.getY() - getY();
@@ -1314,33 +1329,65 @@ public class MyDodo extends Dodo
                 dy = egg.getY();
             }
 
-            
         }
         goToLocation(dx, dy);
         pickUpEgg();
     }
-    
-    
-    
+
     public void hetAlgoritme(){
-        boolean end = false;
-        
-        while(!end){
-            dichtbijzijndeEgg();
+        int total = 1000;
+        int dx = -1;
+        int dy = -1;
+        int value = 0;
+        int waardevolsteEgg = 0;
+        int stepsNeeded = 1000;
+
+        Egg eggWaardevol = null;
+
+        while(steps > 0){
+            total = 1000;
+            stepsNeeded = 1000;
+            waardevolsteEgg = 0;
+            for(Egg egg : getListOfEggsInWorld()){
+
+                int positionX = egg.getX() - getX();
+                int positionY = egg.getY() - getY();
+
+                int result = positionX * positionX + positionY * positionY;
+
+                if(waardevolsteEgg < egg.getValue()){
+                    waardevolsteEgg = egg.getValue();
+                    eggWaardevol = egg;
+
+                    int posX = eggWaardevol.getX() - getX();
+                    int posY = eggWaardevol.getY() - getY(); 
+                    int stepsToGet = Math.abs(posX) + Math.abs(posY);
+                    stepsNeeded = stepsToGet;
+                }
+
+                if(result < total ){
+                    total = result;
+                    dx = egg.getX();
+                    dy = egg.getY();
+                    value = egg.getValue();
+                }
+
+            }
             
-            
-            
-        
-        
-        
+            System.out.println(stepsNeeded);
+
+            if(eggWaardevol.getValue() > stepsNeeded){
+                goToLocation(eggWaardevol.getX(), eggWaardevol.getY());
+                getScore(steps, score += eggWaardevol.getValue());
+            }else{
+                goToLocation(dx, dy);
+                getScore(steps, score += value);
+            }
+
+            if(onEgg()){
+                pickUpEgg();
+            }
         }
-    
-    
-    
-    
-    
-    
-    
-    
     }
+
 }
